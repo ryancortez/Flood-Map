@@ -7,21 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9446514C1D4FD6360072E626 /* FloodingAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9446514B1D4FD6360072E626 /* FloodingAnnotationView.swift */; };
 		94ECA1821D4A6FE400D24521 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94ECA1811D4A6FE400D24521 /* AppDelegate.swift */; };
-		94ECA1841D4A6FE400D24521 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94ECA1831D4A6FE400D24521 /* ViewController.swift */; };
+		94ECA1841D4A6FE400D24521 /* FloodMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94ECA1831D4A6FE400D24521 /* FloodMapViewController.swift */; };
 		94ECA1871D4A6FE400D24521 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94ECA1851D4A6FE400D24521 /* Main.storyboard */; };
 		94ECA1891D4A6FE400D24521 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94ECA1881D4A6FE400D24521 /* Assets.xcassets */; };
 		94ECA18C1D4A6FE400D24521 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94ECA18A1D4A6FE400D24521 /* LaunchScreen.storyboard */; };
+		94ECA1941D4A739700D24521 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94ECA1931D4A739700D24521 /* BlurView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9446514B1D4FD6360072E626 /* FloodingAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloodingAnnotationView.swift; sourceTree = "<group>"; };
 		94ECA17E1D4A6FE400D24521 /* Flood Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Flood Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		94ECA1811D4A6FE400D24521 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		94ECA1831D4A6FE400D24521 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		94ECA1831D4A6FE400D24521 /* FloodMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloodMapViewController.swift; sourceTree = "<group>"; };
 		94ECA1861D4A6FE400D24521 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		94ECA1881D4A6FE400D24521 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		94ECA18B1D4A6FE400D24521 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		94ECA18D1D4A6FE400D24521 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		94ECA1931D4A739700D24521 /* BlurView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,11 +59,13 @@
 			isa = PBXGroup;
 			children = (
 				94ECA1811D4A6FE400D24521 /* AppDelegate.swift */,
-				94ECA1831D4A6FE400D24521 /* ViewController.swift */,
+				94ECA1831D4A6FE400D24521 /* FloodMapViewController.swift */,
 				94ECA1851D4A6FE400D24521 /* Main.storyboard */,
 				94ECA1881D4A6FE400D24521 /* Assets.xcassets */,
 				94ECA18A1D4A6FE400D24521 /* LaunchScreen.storyboard */,
 				94ECA18D1D4A6FE400D24521 /* Info.plist */,
+				94ECA1931D4A739700D24521 /* BlurView.swift */,
+				9446514B1D4FD6360072E626 /* FloodingAnnotationView.swift */,
 			);
 			path = "Flood Map";
 			sourceTree = "<group>";
@@ -135,8 +141,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				94ECA1841D4A6FE400D24521 /* ViewController.swift in Sources */,
+				94ECA1841D4A6FE400D24521 /* FloodMapViewController.swift in Sources */,
 				94ECA1821D4A6FE400D24521 /* AppDelegate.swift in Sources */,
+				94ECA1941D4A739700D24521 /* BlurView.swift in Sources */,
+				9446514C1D4FD6360072E626 /* FloodingAnnotationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,6 +296,7 @@
 				94ECA1921D4A6FE400D24521 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

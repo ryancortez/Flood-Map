@@ -1,25 +1,93 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Flood Map View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="FloodMapViewController" customModule="Flood_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="8C2-rO-iTk">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                            </mapView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qc5-3J-vRR" customClass="BlurView" customModule="Flood_Map" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="20"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E5Z-Tj-oWJ" customClass="BlurView" customModule="Flood_Map" customModuleProvider="target">
+                                <rect key="frame" x="15" y="416" width="285" height="44"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pc5-TC-0Mm">
+                                        <rect key="frame" x="0.0" y="0.0" width="285" height="44"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edf-jM-vyd">
+                                                <rect key="frame" x="0.0" y="0.0" width="285" height="44"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                <state key="normal" title="Report Flooding"/>
+                                                <connections>
+                                                    <action selector="reportFloodingButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qgd-rK-Xov"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Pc5-TC-0Mm" secondAttribute="bottom" id="1s4-aH-Vm2"/>
+                                    <constraint firstItem="Pc5-TC-0Mm" firstAttribute="top" secondItem="E5Z-Tj-oWJ" secondAttribute="top" constant="-416" id="FZt-v1-w3N"/>
+                                    <constraint firstAttribute="height" constant="44" id="McT-z2-9sn"/>
+                                    <constraint firstAttribute="trailing" secondItem="Pc5-TC-0Mm" secondAttribute="trailing" id="R2s-U4-1dC"/>
+                                    <constraint firstItem="Pc5-TC-0Mm" firstAttribute="leading" secondItem="E5Z-Tj-oWJ" secondAttribute="leading" constant="-15" id="bCa-EY-PI3"/>
+                                    <constraint firstItem="Pc5-TC-0Mm" firstAttribute="top" secondItem="E5Z-Tj-oWJ" secondAttribute="top" constant="-416" id="l31-jX-BsF"/>
+                                    <constraint firstItem="Pc5-TC-0Mm" firstAttribute="leading" secondItem="E5Z-Tj-oWJ" secondAttribute="leading" id="lOz-Li-f67"/>
+                                    <constraint firstItem="Pc5-TC-0Mm" firstAttribute="top" secondItem="E5Z-Tj-oWJ" secondAttribute="top" id="mTa-Cc-SWf"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="FZt-v1-w3N"/>
+                                        <exclude reference="bCa-EY-PI3"/>
+                                        <exclude reference="l31-jX-BsF"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Qc5-3J-vRR" firstAttribute="bottom" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="9RU-fK-lvN"/>
+                            <constraint firstItem="8C2-rO-iTk" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="CG1-He-qZa"/>
+                            <constraint firstAttribute="trailing" secondItem="Qc5-3J-vRR" secondAttribute="trailing" id="GrZ-1E-9UF"/>
+                            <constraint firstItem="E5Z-Tj-oWJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-1" id="LTX-WR-Gzq"/>
+                            <constraint firstItem="8C2-rO-iTk" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Tvw-Fe-Htl"/>
+                            <constraint firstItem="8C2-rO-iTk" firstAttribute="trailing" secondItem="Qc5-3J-vRR" secondAttribute="trailing" id="XO1-5E-7SC"/>
+                            <constraint firstAttribute="bottom" secondItem="E5Z-Tj-oWJ" secondAttribute="bottom" constant="20" symbolic="YES" id="aYa-3W-xaW"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="E5Z-Tj-oWJ" secondAttribute="trailing" constant="4" id="bKg-gp-dag"/>
+                            <constraint firstItem="8C2-rO-iTk" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="j5c-dg-4gd"/>
+                            <constraint firstItem="Qc5-3J-vRR" firstAttribute="top" secondItem="8C2-rO-iTk" secondAttribute="top" id="pNC-2c-WFm"/>
+                            <constraint firstItem="Qc5-3J-vRR" firstAttribute="leading" secondItem="8C2-rO-iTk" secondAttribute="leading" id="pQI-SM-qk1"/>
+                        </constraints>
                     </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="mapView" destination="8C2-rO-iTk" id="1bu-TI-VXS"/>
+                        <outlet property="reportButtonStackView" destination="Pc5-TC-0Mm" id="QvQ-Zm-2jN"/>
+                        <outlet property="reportFloodingButton" destination="edf-jM-vyd" id="7H2-OQ-2FY"/>
+                        <outlet property="underReportFloodingView" destination="E5Z-Tj-oWJ" id="pMD-Wc-CiW"/>
+                        <outlet property="underStatusBarView" destination="Qc5-3J-vRR" id="agm-uz-IBL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="820" y="540"/>
         </scene>
     </scenes>
 </document>
