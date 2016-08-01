@@ -144,7 +144,7 @@ class FloodMapViewController: UIViewController, MKMapViewDelegate, CLLocationMan
 
 
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("didUpdateLocations")
+        
     }
 
     
