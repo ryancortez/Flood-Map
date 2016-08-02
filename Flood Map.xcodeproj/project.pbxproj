@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9446514C1D4FD6360072E626 /* FloodingAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9446514B1D4FD6360072E626 /* FloodingAnnotationView.swift */; };
+		9446514F1D4FE4E70072E626 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9446514E1D4FE4E70072E626 /* CloudKit.framework */; };
 		94ECA1821D4A6FE400D24521 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94ECA1811D4A6FE400D24521 /* AppDelegate.swift */; };
 		94ECA1841D4A6FE400D24521 /* FloodMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94ECA1831D4A6FE400D24521 /* FloodMapViewController.swift */; };
 		94ECA1871D4A6FE400D24521 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94ECA1851D4A6FE400D24521 /* Main.storyboard */; };
@@ -18,6 +19,8 @@
 
 /* Begin PBXFileReference section */
 		9446514B1D4FD6360072E626 /* FloodingAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloodingAnnotationView.swift; sourceTree = "<group>"; };
+		9446514D1D4FE4DE0072E626 /* Flood Map.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Flood Map.entitlements"; sourceTree = "<group>"; };
+		9446514E1D4FE4E70072E626 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		94ECA17E1D4A6FE400D24521 /* Flood Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Flood Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		94ECA1811D4A6FE400D24521 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94ECA1831D4A6FE400D24521 /* FloodMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloodMapViewController.swift; sourceTree = "<group>"; };
@@ -33,6 +36,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9446514F1D4FE4E70072E626 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +46,7 @@
 		94ECA1751D4A6FE400D24521 = {
 			isa = PBXGroup;
 			children = (
+				9446514E1D4FE4E70072E626 /* CloudKit.framework */,
 				94ECA1801D4A6FE400D24521 /* Flood Map */,
 				94ECA17F1D4A6FE400D24521 /* Products */,
 			);
@@ -58,6 +63,7 @@
 		94ECA1801D4A6FE400D24521 /* Flood Map */ = {
 			isa = PBXGroup;
 			children = (
+				9446514D1D4FE4DE0072E626 /* Flood Map.entitlements */,
 				94ECA1811D4A6FE400D24521 /* AppDelegate.swift */,
 				94ECA1831D4A6FE400D24521 /* FloodMapViewController.swift */,
 				94ECA1851D4A6FE400D24521 /* Main.storyboard */,
@@ -102,6 +108,12 @@
 				TargetAttributes = {
 					94ECA17D1D4A6FE400D24521 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = DJM86A6U7U;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -259,6 +271,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Flood Map/Flood Map.entitlements";
 				INFOPLIST_FILE = "Flood Map/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ryancortez.Flood-Map";
@@ -270,6 +283,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Flood Map/Flood Map.entitlements";
 				INFOPLIST_FILE = "Flood Map/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ryancortez.Flood-Map";
