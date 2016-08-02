@@ -8,10 +8,20 @@
 
 import UIKit
 import MapKit
+import CloudKit
 
 class FloodingAnnotationView: MKAnnotationView {
     
+    var cloudKitID: CKRecordID!
+    var location: CLLocation!
+    
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
+        
+        super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
+        setupAnnotationView()
+    }
+    
+    init(cloudKitID: CKRecordID, annotation: MKAnnotation?, reuseIdentifier: String?) {
         
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
         setupAnnotationView()

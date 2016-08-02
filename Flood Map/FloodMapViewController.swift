@@ -30,8 +30,9 @@ class FloodMapViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     let floodingReportLocationFieldName = "location"
     
     // Map Annotations
-    var floodingLocations: Array<CLLocation> = []
-    var selectedAnnotation: MKAnnotation?
+    var floodingLocations: Array<FloodingLocation> = []
+    var floodingAnnotationViews: Array<FloodingAnnotationView> = []
+    var selectedAnnotationView: FloodingAnnotationView?
     
     // MARK: - Setup Views
     
@@ -70,16 +71,18 @@ class FloodMapViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     func setupReportButton() {
         roundCornerOfView(self.underReportFloodingView)
         roundCornerOfView(self.reportFloodingButton)
-//        self.underReportFloodingView.blurBackground(withStyle: .Light)
-        self.reportFloodingButton.backgroundColor = UIColor.whiteColor()
+        self.underReportFloodingView.blurBackground(withStyle: .ExtraLight)
+        self.underReportFloodingView.layer.borderColor = self.view.tintColor.CGColor
+        self.underReportFloodingView.layer.borderWidth = 0.1
+        self.reportFloodingButton.backgroundColor = UIColor.clearColor()
         self.reportFloodingButton.setTitle("Report Flooding", forState: .Normal)
         self.reportFloodingButton.setTitleColor(self.view.tintColor, forState: .Normal)
     }
     
     func setupStatusButton() {
-        roundCornerOfView(underStatusBarView)
-        self.underStatusBarView.blurBackground(withStyle: .Light)
-        
+        self.underStatusBarView.blurBackground(withStyle: .ExtraLight)
+        self.underStatusBarView.layer.borderWidth = 0.2
+        self.underStatusBarView.layer.borderColor = self.view.tintColor.CGColor
     }
     
     func roundCornerOfView(view: UIView) {
@@ -88,8 +91,8 @@ class FloodMapViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     }
     
     func addAllPublicAnnotations() {
-        for location in floodingLocations {
-            addAnnotation(toMap: self.mapView, withTitle: "Flooding near location", andLocation: location.coordinate, saveToCloudKit: false)
+        for floodingLocation in self.floodingLocations {
+            addAnnotation(toMap: self.mapView, withTitle: "Flooding near location", andCoordinate:floodingLocation.location.coordinate, saveToCloudKit: false)
         }
     }
     
@@ -104,7 +107,8 @@ class FloodMapViewController: UIViewController, MKMapViewDelegate, CLLocationMan
                     print("Did not find CLLocation in CKRecord with key: \(self.floodingReportLocationFieldName)")
                     return
                 }
-                self.floodingLocations.append(location)
+                let floodingLocation = FloodingLocation(withLocation: location, andCloudKitRecordID: record.recordID)
+                self.floodingLocations.append(floodingLocation)
                 if ((error) != nil) {
                     print("Did not get all locations from CloudKit due to error: \(error)")
                 }
@@ -126,11 +130,16 @@ class FloodMapViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         }
     }
     
-    func removeFloodingLocationFromPublicCloudKit() {
+    func removePublicCloudKitRecord(withFloodingAnnotationView annotationView: FloodingAnnotationView) {
+        guard annotationView.cloudKitID != nil else {
+            print("Did not find cloudKitID"); return
+        }
         
-        let predicate = NSPredicate(
-        let query = CKQuery(recordType: floodingReportRecordType, predicate: <#T##NSPredicate#>)
-        self.publicDB.performQuery(<#T##query: CKQuery##CKQuery#>, inZoneWithID: <#T##CKRecordZoneID?#>, completionHandler: <#T##([CKRecord]?, NSError?) -> Void#>)
+        self.publicDB.deleteRecordWithID(annotationView.cloudKitID) { (recordID: CKRecordID?, error: NSError?) in
+            if (error != nil) {
+                print(error)
+            }
+        }
     }
     
     
@@ -155,15 +164,29 @@ class FloodMapViewController: UIViewController, MKMapViewDelegate, CLLocationMan
             return nil
         }
         
-        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier("FloodingAnnotationView")
+        let floodingAnnotationViewReuseIdentifier = "FloodingAnnotationView"
+        let annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(floodingAnnotationViewReuseIdentifier)
         if annotationView == nil {
-            annotationView = FloodingAnnotationView(annotation: annotation, reuseIdentifier: "FloodingAnnotationView")
+            
+            let floodingAnnotationView = FloodingAnnotationView(annotation: annotation, reuseIdentifier: floodingAnnotationViewReuseIdentifier)
+            
+            for floodingLocation in self.floodingLocations {
+                
+                guard let annotation = floodingAnnotationView.annotation else {
+                    print("Did not find location.coordinate in floodingLocation"); return nil
+                }
+                
+                if (floodingLocation.location.coordinate.latitude == annotation.coordinate.latitude && floodingLocation.location.coordinate.longitude == floodingLocation.location.coordinate.longitude) {
+                    floodingAnnotationView.cloudKitID = floodingLocation.cloudKitRecordID
+                }
+            }
             
             // Add detail button to right callout
-            annotationView!.canShowCallout = true
+            floodingAnnotationView.canShowCallout = true
             let calloutButton = UIButton(type: .DetailDisclosure)
             calloutButton.addTarget(self, action: #selector(removeAnnotationButtonPressed), forControlEvents: .TouchUpInside)
-            annotationView!.rightCalloutAccessoryView = calloutButton
+            floodingAnnotationView.rightCalloutAccessoryView = calloutButton
+            return floodingAnnotationView
         }
         else {
             annotationView!.annotation = annotation
@@ -172,12 +195,15 @@ class FloodMapViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     }
     
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
-        selectedAnnotation = view.annotation
+        guard let floodingAnnotationView = view as? FloodingAnnotationView else {
+            print("Could not cast selected MKAnnotationView as FloodingAnnotationView, returned nil"); return
+        }
+        selectedAnnotationView = floodingAnnotationView
     }
     
     // MARK: - MapView - Annotaions
     
-    func addAnnotation(toMap map: MKMapView, withTitle title: String, andLocation coordinate: CLLocationCoordinate2D, saveToCloudKit: Bool) {
+    func addAnnotation(toMap map: MKMapView, withTitle title: String, andCoordinate coordinate: CLLocationCoordinate2D, saveToCloudKit: Bool) {
         let annotation = MKPointAnnotation()
         annotation.title = title
         annotation.coordinate = coordinate
@@ -189,9 +215,11 @@ class FloodMapViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     }
     
     func removeSelectedAnnotation() {
-        guard let annotation = selectedAnnotation else {
-            print("Did not find annotation in MKAnnotationView")
-            return
+        guard let annotationView = selectedAnnotationView else {
+            print("Did not find annotation in MKAnnotationView"); return
+        }
+        guard let annotation = annotationView.annotation else {
+            print("Did not find annotation in selectedAnnotationView"); return
         }
         self.mapView.removeAnnotation(annotation)
     }
@@ -234,18 +262,22 @@ class FloodMapViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     
     override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
         if motion == .MotionShake {
-            self.addAnnotation(toMap: self.mapView, withTitle: "Flooding near this area", andLocation: self.mapView.userLocation.coordinate, saveToCloudKit: true)
+            self.addAnnotation(toMap: self.mapView, withTitle: "Flooding near this area", andCoordinate: self.mapView.userLocation.coordinate, saveToCloudKit: true)
         }
     }
     
     // MARK: - Actions
     
     func removeAnnotationButtonPressed() {
+        guard let annotationView = selectedAnnotationView else {
+            print("selectedAnnotationView is nil and cannot be used to remove a CloudKit record"); return
+        }
+        removePublicCloudKitRecord(withFloodingAnnotationView: annotationView)
         removeSelectedAnnotation()
     }
     
     @IBAction func reportFloodingButtonPressed(sender: AnyObject) {
-        self.addAnnotation(toMap: self.mapView, withTitle: "Flooding near this area", andLocation: self.mapView.userLocation.coordinate, saveToCloudKit: true)
+        self.addAnnotation(toMap: self.mapView, withTitle: "Flooding near this area", andCoordinate: self.mapView.userLocation.coordinate, saveToCloudKit: true)
     }
     @IBAction func cautionButtonPressed(sender: AnyObject) {
         

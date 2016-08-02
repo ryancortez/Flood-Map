@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		940CB68E1D5114070023D37D /* FloodingLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940CB68D1D5114070023D37D /* FloodingLocation.swift */; };
 		9446514C1D4FD6360072E626 /* FloodingAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9446514B1D4FD6360072E626 /* FloodingAnnotationView.swift */; };
 		9446514F1D4FE4E70072E626 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9446514E1D4FE4E70072E626 /* CloudKit.framework */; };
 		94ECA1821D4A6FE400D24521 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94ECA1811D4A6FE400D24521 /* AppDelegate.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		940CB68D1D5114070023D37D /* FloodingLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloodingLocation.swift; sourceTree = "<group>"; };
 		9446514B1D4FD6360072E626 /* FloodingAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloodingAnnotationView.swift; sourceTree = "<group>"; };
 		9446514D1D4FE4DE0072E626 /* Flood Map.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Flood Map.entitlements"; sourceTree = "<group>"; };
 		9446514E1D4FE4E70072E626 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -43,10 +45,55 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		94ECA1751D4A6FE400D24521 = {
+		940CB68F1D512FCA0023D37D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				9446514E1D4FE4E70072E626 /* CloudKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		940CB6901D512FDC0023D37D /* Entitlements */ = {
+			isa = PBXGroup;
+			children = (
+				9446514D1D4FE4DE0072E626 /* Flood Map.entitlements */,
+			);
+			name = Entitlements;
+			sourceTree = "<group>";
+		};
+		940CB6911D512FF10023D37D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				94ECA1851D4A6FE400D24521 /* Main.storyboard */,
+				94ECA1881D4A6FE400D24521 /* Assets.xcassets */,
+				94ECA18A1D4A6FE400D24521 /* LaunchScreen.storyboard */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		940CB6921D512FF70023D37D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				94ECA1811D4A6FE400D24521 /* AppDelegate.swift */,
+				94ECA1831D4A6FE400D24521 /* FloodMapViewController.swift */,
+				94ECA1931D4A739700D24521 /* BlurView.swift */,
+				9446514B1D4FD6360072E626 /* FloodingAnnotationView.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		940CB6931D512FFF0023D37D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				94ECA18D1D4A6FE400D24521 /* Info.plist */,
+				940CB68D1D5114070023D37D /* FloodingLocation.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		94ECA1751D4A6FE400D24521 = {
+			isa = PBXGroup;
+			children = (
 				94ECA1801D4A6FE400D24521 /* Flood Map */,
 				94ECA17F1D4A6FE400D24521 /* Products */,
 			);
@@ -63,15 +110,11 @@
 		94ECA1801D4A6FE400D24521 /* Flood Map */ = {
 			isa = PBXGroup;
 			children = (
-				9446514D1D4FE4DE0072E626 /* Flood Map.entitlements */,
-				94ECA1811D4A6FE400D24521 /* AppDelegate.swift */,
-				94ECA1831D4A6FE400D24521 /* FloodMapViewController.swift */,
-				94ECA1851D4A6FE400D24521 /* Main.storyboard */,
-				94ECA1881D4A6FE400D24521 /* Assets.xcassets */,
-				94ECA18A1D4A6FE400D24521 /* LaunchScreen.storyboard */,
-				94ECA18D1D4A6FE400D24521 /* Info.plist */,
-				94ECA1931D4A739700D24521 /* BlurView.swift */,
-				9446514B1D4FD6360072E626 /* FloodingAnnotationView.swift */,
+				940CB6931D512FFF0023D37D /* Model */,
+				940CB6921D512FF70023D37D /* Controllers */,
+				940CB6911D512FF10023D37D /* Views */,
+				940CB6901D512FDC0023D37D /* Entitlements */,
+				940CB68F1D512FCA0023D37D /* Frameworks */,
 			);
 			path = "Flood Map";
 			sourceTree = "<group>";
@@ -156,6 +199,7 @@
 				94ECA1841D4A6FE400D24521 /* FloodMapViewController.swift in Sources */,
 				94ECA1821D4A6FE400D24521 /* AppDelegate.swift in Sources */,
 				94ECA1941D4A739700D24521 /* BlurView.swift in Sources */,
+				940CB68E1D5114070023D37D /* FloodingLocation.swift in Sources */,
 				9446514C1D4FD6360072E626 /* FloodingAnnotationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
