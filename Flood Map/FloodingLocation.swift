@@ -9,6 +9,7 @@
 import CloudKit
 import CoreLocation
 
+// Represents a area that the user reported flooding was happening
 class FloodingLocation: NSObject {
     var location: CLLocation!
     var cloudKitRecordID: CKRecordID!

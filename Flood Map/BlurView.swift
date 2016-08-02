@@ -10,6 +10,7 @@ import UIKit
 
 class BlurView: UIVisualEffectView {
 
+    // Blur the background of the view
     func blurBackground(withStyle style: UIBlurEffectStyle) {
         self.backgroundColor = UIColor.clearColor()
         self.effect = UIBlurEffect(style: style)

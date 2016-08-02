@@ -10,6 +10,8 @@ import UIKit
 import MapKit
 import CloudKit
 
+
+// A custom annotation that holds a location and CloudKit ID
 class FloodingAnnotationView: MKAnnotationView {
     
     var cloudKitID: CKRecordID!

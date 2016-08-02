@@ -72,9 +72,6 @@
                     <rect key="frame" x="0.0" y="0.0" width="182" height="128"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" image="Caution"/>
-                    <connections>
-                        <action selector="cautionButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6pz-ZZ-T4z"/>
-                    </connections>
                 </button>
             </objects>
             <point key="canvasLocation" x="820" y="540"/>
